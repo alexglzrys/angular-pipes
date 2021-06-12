@@ -1,0 +1,44 @@
+<div class="text-layout">
+  <h1>Decimal Pipe y Porcentajes</h1>
+  <p>Pipes incluídos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<div class="p-grid">
+  <div class="p-col-4">
+    <p-card header="Ventas Netas"
+            subheader="Del presente año">
+      <i class="pi pi-dollar"></i>
+      {{ ventasNetas | number }}
+      <br>
+      <i class="pi pi-dollar"></i>
+      <!-- Quiero toda la parte entera del número (por eso un 1), y siempre con dos decimales (min 2, max 2)
+           Angular por defecto redondea
+
+           Si se necesitara rellenar con ceros en la parte entera, entonces colocamos el número de cifras (3 ###.decimales).Entonces si la parte entera no lo llega a cubrir se rellena el resto con ceros 023.452-->
+      {{ ventasNetas | number:'1.2-2'}}
+    </p-card>
+  </div>
+
+  <div class="p-col-4">
+    <p-card header="Ventas Brutas"
+            subheader="Del presente año">
+      {{ ventasNetas | currency }}
+      <br>
+      {{ ventasNetas | currency:'MXN' }}
+      <br>
+      <!-- Podemos especificar el formato de moneda. Este viene relacionado con el idioma registrado en la aplicación
+      Código de moneda:símbolo:digitos(parteEntera.decimalMin-decimalMax):idioma -->
+      {{ ventasNetas | currency:'MXN':'symbol-narrow':'1.4-4':'es-MX'}}
+    </p-card>
+  </div>
+
+  <div class="p-col-4">
+    <p-card header="Ganancia Porcentual"
+            subheader="Del presente año">
+      {{ porcentaje | percent }}
+      <br>
+      {{ porcentaje | percent:'1.2-2' }}
+      <br>
+    </p-card>
+  </div>
+</div>

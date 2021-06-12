@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+/* Los temas de PrimeNG incorporan un conjunto de variables globales de CSS 
+para usarlas segun nuestras necesidades
+node_modules/primeng/resources/themes/vela-blue/theme.css */
+
+html, body {
+	background-color: var(--surface-b);
+	font-family: var(--font-family);
+}
+
+.text-layout {
+	color: var(--text-color);
+}

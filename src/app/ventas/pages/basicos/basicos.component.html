@@ -1,0 +1,71 @@
+<div class="text-layout">
+    <h1>Pipes Básicos</h1>
+    <p>Pipes predefinidos en Angular - Se encuentran dentro de Common Module</p>
+</div>
+
+<!-- PrimeNG ya cuenta por defecto soporte para trabajar con Flexbox, pero
+se recomienda instalar PrimeFlex para tener a nuestra disposición un conjunto de helpers
+para este tipo de layout, incluído CSS GRID -->
+<div class="p-grid">
+    <div class="p-col-4">
+        <!-- Los pipes no mutan la información solo la decoran, pueden emplearse en {{interpolaciones}} o como valor de los atributos [atributo] -->
+        <p-card header="UpperCase"
+                [subheader]="nombreLower">
+          {{ nombreLower | uppercase }}
+        </p-card>
+    </div>
+    <div class="p-col-4">
+      <p-card header="LowerCase"
+              [subheader]="nombreUpper">
+        {{ nombreUpper | lowercase }}
+      </p-card>
+    </div>
+    <div class="p-col-4">
+      <p-card header="TitleCase"
+              [subheader]="nombreCompleto">
+        {{ nombreCompleto | titlecase }}
+      </p-card>
+    </div>
+</div>
+
+<div class="text-layout">
+  <h1>Pipe Fecha</h1>
+  <p>Pipe para mostrar fechas</p>
+</div>
+
+<div class="p-grid">
+  <div class="p-col-6">
+    <p-card>
+      <ul>
+        <li>Fecha por defecto</li>
+        <li>fecha | date</li>
+        <li>fecha | date:'short'</li>
+        <li>fecha | date:'long'</li>
+        <li>fecha | date:'formato_personalizado'</li>
+      </ul>
+      <hr>
+      <ul>
+        <li>fecha | date:'format':'timezone_especifico'</li>
+        <li>fecha | date:'format':'timezone_default':'locale_especifico'</li>
+      </ul>
+    </p-card>
+  </div>
+  <div class="p-col-6">
+    <p-card>
+      <ul>
+        <li>{{ fecha }}</li>
+        <li>{{ fecha | date }}</li>
+        <li>{{ fecha | date:'short' }}</li>
+        <li>{{ fecha | date:'long' }}</li>
+        <!-- Un Pipe addoc se recomienda generarlo personalmente y personalizarlo a nuestra manera -->
+        <li>{{ fecha | date:'EEEE dd MMMM, yyyy' }}</li>
+      </ul>
+      <hr>
+      <ul>
+        <li>{{ fecha | date:'long':'GMT-3' }}</li>
+        <!-- Se tiene que tener registrado previamente el idioma diferente a usar -->
+        <li>{{ fecha | date:'long':'':'br' }}</li>
+      </ul>
+    </p-card>
+  </div>
+</div>

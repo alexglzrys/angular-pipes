@@ -1,0 +1,76 @@
+<div class="text-layout">
+  <h1>Pipes No Comunes</h1>
+  <p>Pipes incluídos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<div class="p-grid">
+  <div class="p-col-12 p-sm-9 p-md-6 ">
+    <p-fieldset legend="i18nSelect Pipe" [toggleable]="true">
+      <!-- i18nSelect sirve para colocar textos que acorden con base en el genero -->
+      <p><strong>Saludos {{ nombre }}</strong> es un placer <strong>{{ genero | i18nSelect:mapInvitacion }}</strong> a nuestro evento que tendrá lugar en las instalaciones del Centro Cultural Banamex este 14 y 15 de Julio de 2021.</p>
+      <button label="Cambiar Persona" pRipple pButton type="button" class="p-button-success" (click)="cambiarPersona()"></button>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-md-6 p-sm-9">
+    <p-fieldset legend="i18nSelectPlural Pipe" [toggleable]="true">
+      <!-- i18nSelectPlural sirve para pluralizar o singularizar los textos -->
+      <p>Actualmente tenemos {{ clientes.length | i18nPlural:mapClientes }} esperando en sistema.</p>
+      <!-- Una sutil diferencia: Los componentes de boton sus eventos son definidos con el prefijo on -->
+      <p-button label="Borrar cliente" type="button" styleClass="p-button-warning" (onClick)="borrarCliente()"></p-button>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-md-6 p-sm-9">
+    <p-fieldset legend="Slice Pipe" [toggleable]="true">
+      <strong>Original</strong>
+      <pre>{{ clientes }}</pre>
+      <br>
+      <strong>Slice:0:2</strong>
+      <!-- Slice: PosicionIndexInicial: PosicionIndexFinal (excluyente)
+      Funciona tanto para arreglos como para strings  -->
+      <pre>{{ clientes | slice:0:2}}</pre>
+      <br>
+      <strong>Slice:1:2</strong>
+      <pre>{{ clientes | slice:1:2 }}</pre>
+      <br>
+      <strong>Slice:0:4</strong>
+      <pre>{{ 'Alejandro' | slice:0:4 }}</pre>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-md-6 p-sm-9">
+    <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+      <ul>
+        <!-- KeyValue: Nos permite iterar por las propiedades de un objeto -->
+        <li *ngFor="let item of persona | keyvalue">
+          {{ item }} <br>
+          Key: {{ item.key }} - Value: {{ item.value }} <br>
+          JSON: {{ item | json }}
+        </li>
+      </ul>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-md-6 p-sm-9">
+    <p-fieldset legend="Json Pipe" [toggleable]="true">
+      <!-- JSON: Permite representar el contenido de un objeto. Util para depuraciones -->
+      <pre>{{ heroes | json }}</pre>
+    </p-fieldset>
+  </div>
+
+  <div class="p-col-12 p-md-6 p-sm-9">
+    <p-fieldset legend="Async Pipe" [toggleable]="true">
+      <!-- Async: Se suscribe automáticamente a un observable | promesa,
+        y desenvuelve su respuesta lista para su utilización -->
+
+      <!-- Este condiconal funciona un poco diferente, ya que por naturaleza, cuando se hace una suscripcion a un observable, estas son independientes. Por tanto, aqui tenemos dos suscripciones. -->
+      <!-- Esto es mejor trabajarlo con propiedades del tipo: Loading en estados (solicitando, respuesta, hay datos/no hay datos) -->
+      <p *ngIf="!(miObservable | async)">Esperando resolución de observable...</p>
+      <pre>{{ miObservable | async }}</pre>
+
+      <p *ngIf="!(miPromesa | async)">Esperando resolución de promesa...</p>
+      <pre>{{ miPromesa | async }}</pre>
+    </p-fieldset>
+  </div>
+</div>

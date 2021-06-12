@@ -1,0 +1,78 @@
+<div class="text-layout">
+  <h1>Pipes Personalizados</h1>
+  <p>Desarrollar pipes para resolver problemas especificos de nuestra Aplicación</p>
+  <!-- Usar un componente personalizado (debe estar registrado en el modulo que gestiona este componente) -->
+  <pre>{{ 'nosotros' | mayusculas:enMayusculas }}</pre>
+
+</div>
+
+
+
+<div class="p-grid p-mt-2">
+  <div class="p-col">
+    <!-- Componente PrimeNG Toolbar -->
+    <p-toolbar>
+      <div class="p-toolbar-group-left">
+        <button pButton label="Alternar Argumento Pipe" (click)="alternarArgumento()" class="p-mr-1 p-button-help"></button>
+      </div>
+      <div class="p-toolbar-group-right">
+        <button pButton label="Por nombre" icon="pi pi-sort" class="p-mr-1" (click)="ordenarPropiedadPor('nombre')"></button>
+        <button pButton label="Vuela" icon="pi pi-sort" class="p-mr-1 p-button-success" (click)="ordenarPropiedadPor('vuela')"></button>
+        <button pButton label="Por color" icon="pi pi-sort" class="p-mr-1 p-button-warning" (click)="ordenarPropiedadPor('color')"></button>
+      </div>
+    </p-toolbar>
+    <!-- Componente PrimeNG Table: Como valor siempre espera un arreglo
+    Requiere previamente: npm install @angular/cdk --save -->
+
+    <!-- Pipe ordenar: Recibe un arreglo de objetos de tipo Heroe y los ordena por nombre -->
+    <p-table [value]="heroes | ordenar:ordenarPor">
+      <ng-template pTemplate="header">
+          <tr>
+              <th>Nombre</th>
+              <th>Vuela</th>
+              <th>Color</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-heroe>
+          <!-- Internamente el componente itera el arreglo y lo almacena en la variable let-xxxx definida en el body -->
+          <tr>
+              <td>{{ heroe.nombre }}</td>
+              <!-- Pipe vuela: decora la información impresa con base en un valor booleano -->
+              <!-- Es posible encadenar pipes, el orden de procesamiento es de izquierda a derecha -->
+              <td>{{ heroe.vuela | vuela | titlecase }}</td>
+              <!-- Si se desea ordenar por color, es necesario que los elemetnos del Enum esten colocados alfabeticamente, ya que este es como un mapa, donde el valor real es el indice que ocupa el elemento de texto -->
+              <td>{{ heroe.color | color | titlecase }}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+
+  <div class="p-col">
+    <!-- Componente PrimeNG Table: Como valor siempre espera un arreglo
+    Requiere previamente: npm install @angular/cdk --save -->
+
+    <!-- Este componente tiene muchas funciones, entre ella el de ordenar por columnas -->
+    <p-table [value]="heroes">
+      <ng-template pTemplate="header">
+          <tr>
+              <!-- Ordenar por columnas especificas -->
+              <th pSortableColumn="nombre">Nombre <p-sortIcon field="nombre"></p-sortIcon></th>
+              <th pSortableColumn="vuela">Vuela <p-sortIcon field="vuela"></p-sortIcon></th>
+              <th pSortableColumn="color">Color <p-sortIcon field="color"></p-sortIcon></th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-heroe>
+          <!-- Internamente el componente itera el arreglo y lo almacena en la variable let-xxxx definida en el body -->
+          <tr>
+              <td>{{ heroe.nombre }}</td>
+              <!-- Pipe vuela: decora la información impresa con base en un valor booleano -->
+              <!-- Es posible encadenar pipes, el orden de procesamiento es de izquierda a derecha -->
+              <td>{{ heroe.vuela | vuela | titlecase }}</td>
+              <td>{{ heroe.color | color | titlecase }}</td>
+          </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+</div>
